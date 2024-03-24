@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
@@ -21,10 +23,17 @@ public class Product implements Serializable {
     private int quantity;
     private double price;
 
-    @ManyToOne
-    private OrderProduct orderProduct;
+    @OneToMany(mappedBy = "product")
+    private List<OrderProduct> orderProduct;
 
     public Product(String name, int quantity, double price) {
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public Product(long id, String name, int quantity, double price) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;

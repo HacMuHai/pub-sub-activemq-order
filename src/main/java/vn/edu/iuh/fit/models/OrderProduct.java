@@ -17,6 +17,7 @@ public class OrderProduct implements Serializable {
     private long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "proId")
     private Product product;
     private int quantity;
     private String email;
